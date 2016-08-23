@@ -42,7 +42,10 @@ class Colorific(ServiceBase):
         """Initialize device information from provided bluez device."""
         # Get the color characteristic.
         self._colorific = device.find_service(COLOR_SERVICE_UUID)
-        self._color = self._colorific.find_characteristic(COLOR_CHAR_UUID)
+        if None != self._colorific:
+            self._color = self._colorific.find_characteristic(COLOR_CHAR_UUID)
+        else:
+            print "No service found"
 
     def set_color(self, r, g, b):
         """Set the red, green, blue color of the bulb."""
@@ -51,4 +54,5 @@ class Colorific(ServiceBase):
         command = '\x58\x01\x03\x01\xFF\x00{0}{1}{2}'.format(chr(r & 0xFF),
                                                              chr(g & 0xFF),
                                                              chr(b & 0xFF))
+        print command
         self._color.write_value(command)

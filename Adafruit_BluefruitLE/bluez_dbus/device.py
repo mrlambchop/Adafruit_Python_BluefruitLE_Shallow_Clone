@@ -109,6 +109,7 @@ class BluezDevice(Device):
                         get_provider()._get_objects(_CHARACTERISTIC_INTERFACE,
                                                     self._device.object_path))
             actual_chars = Counter(map(lambda x: x.uuid, chars))
+
             # Compare actual discovered UUIDs with expected and return true if at
             # least the expected UUIDs are available.
             if actual_services >= expected_services and actual_chars >= expected_chars:

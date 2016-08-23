@@ -22,6 +22,7 @@
 # SOFTWARE.
 import threading
 
+import binascii
 import objc
 
 from ..config import TIMEOUT_SEC
@@ -94,6 +95,7 @@ class CoreBluetoothGattCharacteristic(GattCharacteristic):
     def write_value(self, value, write_type=0):
         """Write the specified value to this characteristic."""
         data = NSData.dataWithBytes_length_(value, len(value))
+        print "Data out", binascii.hexlify( data )
         self._device._peripheral.writeValue_forCharacteristic_type_(data,
             self._characteristic,
             write_type)

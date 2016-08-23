@@ -122,11 +122,15 @@ class CoreBluetoothDevice(Device):
         on_changed = self._char_on_changed.get(characteristic, None)
         if on_changed is not None:
             on_changed(characteristic.value().bytes().tobytes())
+        else:
+            print "Nobody listneing", characteristic
         # Also tell the characteristic that it has a new value.
         # First get the service that is associated with this characteristic.
         char = characteristic_list().get(characteristic)
         if char is not None:
             char._value_read.set()
+        else:
+            print "Nobody cares"
 
     def _descriptor_changed(self, descriptor):
         """Called when the specified descriptor has changed its value."""

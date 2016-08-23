@@ -139,6 +139,7 @@ class CentralDelegate(object):
         logger.debug('peripheral_didDiscoverCharacteristicsForService_error called')
         # Stop if there was some kind of error.
         if error is not None:
+            logger.debug('peripheral_didDiscoverCharacteristicsForService_error - error %s', error)
             return
         # Make sure the discovered characteristics are added to the list of known
         # characteristics, and kick off descriptor discovery for each char.
